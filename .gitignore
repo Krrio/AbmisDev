@@ -281,7 +281,7 @@ __pycache__/
 /coverage
 
 # next.js
-/.next/
+frontend/.next/
 /out/
 
 # production
