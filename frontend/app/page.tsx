@@ -1,9 +1,9 @@
-import Image from "next/image";
+import React from 'react'
 
-export default function Home() {
+const page = () => {
   return (
-    <div className="items-center justify-center flex flex-col mt-5">
-      <h1 className="text-5xl text-center">AbmisApp</h1>
-    </div>
-  );
+    <div>page</div>
+  )
 }
+
+export default page
