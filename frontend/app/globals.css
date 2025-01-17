@@ -3,12 +3,48 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Gilroy', Arial, sans-serif;
 }
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy/Gilroy-Heavy.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 96.5%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
