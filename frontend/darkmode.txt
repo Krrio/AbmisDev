@@ -1,0 +1,45 @@
+Nie implementowałem switcha do dark/light mode na stronie w jakimś konkretnym miejscu,
+uruchamiałem jak było to konieczne.
+Jezeli to chcecie zobaczyc jak strona wyglada w dark theme to polecam 
+wrzucic w layoutcie przy navbarze ten fragment kodu:
+
+// import { ModeToggle } from "@/components/ui/ModeToggle"; //
+
+i uzyc <ModeToggle />
+
+Pojawi się przycisk do zmiany themu.
+
+W global.css zaimplementowana jest globalnie czcionka,
+jedyne co trzeba dostosowywać to grubość -> wszystkie rodzaje czcionek są w folderze
+/public/fonts/gilroy
+
+W global.css zaimplementowalem tez kolory zgodne z designem w figmie, globalnie, 
+zarowno dla dark jak i light mode.
+
+
+Na ten moment navbar jest zaimplementowany dla /sign-up i /sign-in i wszystkie
+przyciski sa klikalne, (czy trzeba ja ukryc przez zalogowaniem -> do dogadania)
+
+obecny theme jest ustawiony tak ze wybiera light/dark w zaleznosci od tego jaki theme
+ustawiony ma komputer uzytkownika (dziedziczy od systemu). Mozna to przestawic 
+w głownym layautcie zmieniając defaultTheme na którąś z opcji pomiędzy dark | light.
+
+    //    <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+          >
+            {children}
+    //      </ThemeProvider>
+
+Wlasne komponenty zeby zachowac porzadek przydaloby sie tworzyc w /components, 
+a /components/ui uzywac do instalowania gotowych komponentow z np ShadcnUI czy MagicUI
+
+MobileNavigation -> zaimplementuje w navbarze w najblizyszym czasie 
+(zaimplementowana bedzie poza /sign-in oraz /sign-up bo przed zalogowaniem
+linki i tak beda niedostepne)
+
+// TO DO
+
+1. zainstalowac i zsetupować prettiera do formatowania tekstu zeby kod byl przejrzysty
+
+2. ustalic jakie podstrony ma miec aplikacja (zeby poprawnie zmapowac je w navbarze)
