@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils";
-import { motion, MotionProps } from "framer-motion";
+import { motion, MotionProps } from "motion/react";
 
 interface LineShadowTextProps
   extends Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps>,
@@ -17,8 +17,7 @@ export function LineShadowText({
   as: Component = "span",
   ...props
 }: LineShadowTextProps) {
-  // Użyj motion(Component)
-  const MotionComponent = motion(Component);
+  const MotionComponent = motion.create(Component);
   const content = typeof children === "string" ? children : null;
 
   if (!content) {

@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ui/ModeToggle";
+import { AuroraText } from "@/components/ui/aurora-text";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
@@ -17,7 +18,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           <div className="flex flex-col lg:flex-row items-center lg:items-start lg:space-x-4 lg:-mt-[165px] mt-10">
             <div>
               <h1 className="md:text-4xl text-3xl font-bold hero-1 text-center lg:text-left">
-                The Best Way<br /> To Control Your Time
+                The Best Way <br className="hidden sm:block"/>to{' '}<AuroraText>Control Your Time</AuroraText>
               </h1>
               <Image 
                 src={gradient2}
@@ -41,8 +42,8 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           </div>
           <div className="mt-4">
             <p className="text-md font-medium text-center lg:text-left mb-10 hidden md:block">
-              if you don’t have an account <br /> you can{" "}
-              <span className="font-bold text-[#4461F2]">Register here!</span>
+            Plan, organize, and take control<br />of your daily schedule
+              <span className="font-bold text-[#4461F2]">{" "}effortlessly</span>
             </p>
             <Image 
               src={gradient1}
