@@ -43,6 +43,33 @@ body {
 
 
 @layer base {
+
+  /* Remove scrollbar */
+  .remove-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    border-radius: 0px;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 0px;
+  }
+
+  .remove-scrollbar::-webkit-scrollbar-thumb:hover {
+    /* background: #1e2238; */
+    background: transparent;
+  }
+
+  .recharts-responsive-container {
+    height: initial !important;
+  }
+
+
   :root {
     --background: 0 0% 96.5%;
     --foreground: 0 0% 3.9%;
@@ -71,7 +98,7 @@ body {
     --radius: 0.5rem;
   }
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 235 39.4% 12.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -104,5 +131,44 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Customowe klasy do stylowania  */
+
+@layer utilities {
+
+  .header-1 {
+    @apply tracking-[1px] text-[15px]
+  }
+
+  .form-subtitle {
+    @apply font-bold text-gray-400 text-[12px] w-full flex justify-end cursor-pointer
+  }
+
+  .form-subtitle-1 {
+    @apply font-bold text-gray-400 text-[12px] w-full flex cursor-pointer
+  }
+
+  .hero-1 {
+    @apply dark:leading-[47px] leading-[47px]
+  }
+
+
+  /* Overridy do styli ShadcnUI */
+
+  .shad-form-button {
+    @apply bg-[#4461F2] hover:bg-blue-500 rounded-[10px] font-bold shadow-[0_2px_8px_rgba(68,_97,_242,_0.7)] dark:shadow-[0_2px_4px_rgba(68,_97,_242,_0.7)] py-6 dark:text-white !important
+  }
+  .shad-form-input {
+    @apply bg-[#EAF0F7] dark:bg-[#EAF0F7] dark:placeholder:text-gray-500 focus:ring-[#EAF0F7] py-6 focus:border-none !important
+  }
+
+  .auth-option {
+    @apply bg-transparent dark:bg-white border shadow-none hover:scale-110 transition-all duration-200 ease-out !important
+  }
+
+  .selected-auth-option {
+    @apply bg-white shadow-xl hover:scale-110 transition-all duration-200 ease-out !important
   }
 }
