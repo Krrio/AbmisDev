@@ -6,8 +6,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { AuroraText } from "@/components/ui/aurora-text";
+import { useRef } from "react";
+import MotionHero from "@/components/MotionHero";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
+
   return (
     <main className="container mx-auto px-[80px]">
       <div className="hidden lg:block">
@@ -35,9 +38,12 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
                 alt="hero"
                 width={400}
                 height={400}
-                className="lg:-mt-6 lg:ml-4 md:absolute md:hidden xl:block scale-75 lg:scale-100"
+                className="lg:-mt-6 lg:ml-4 md:absolute md:hidden xl:block scale-75 lg:scale-100 hidden"
                 draggable={false}
               />
+              <div className="md:hidden">
+                <MotionHero />
+              </div>
             </div>
           </div>
           <div className="mt-4">
@@ -55,7 +61,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             />
           </div>
         </div>
-        <div className="lg:w-1/3 h-full flex lg:justify-end sm:justify-center">
+        <div className="lg:w-1/3 h-full flex lg:justify-end justify-center">
           <div className="h-full flex flex-col justify-center items-end">
             <div className="flex w-full lg:px-0 flex-col items-end lg:flex-row lg:space-x-2 lg:-mt-[165px]">
               {children}

@@ -164,6 +164,13 @@ body {
     @apply dark:leading-[47px] leading-[47px]
   }
 
+  .mobile-nav-list {
+    @apply flex flex-1 flex-col gap-4
+  }
+
+  .mobile-nav-item {
+    @apply flex gap-4 w-full justify-start items-center px-6 h-[52px] rounded-full !important
+  }
 
   /* Overridy do styli ShadcnUI */
 
@@ -180,5 +187,17 @@ body {
 
   .selected-auth-option {
     @apply bg-white shadow-xl hover:scale-110 transition-all duration-200 ease-out !important
+  }
+
+  .shad-active {
+    @apply bg-[#4461F2]/30 text-[#4461F2] font-bold !important
+  }
+
+  .nav-icon {
+    @apply text-red-500
+  }
+
+  .nav-icon-active {
+    @apply text-[#4461F2]
   }
 }

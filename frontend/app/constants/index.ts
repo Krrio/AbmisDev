@@ -38,6 +38,38 @@ export const authItems = [
       },
 ]
 
+export const MobileNavItems = [
+  {
+    name: "Home",
+    url: "/",
+    icon: "/svg/blue1.svg"
+  },
+  {
+    name: "About",
+    url: "/about",
+    icon: "/svg/blue2.svg"
+  },
+  {
+    name: "Blog",
+    url: "/blog",
+    icon: "/svg/blue3.svg"
+  },
+  {
+    name: "Pages",
+    url: "/pages",
+    icon: "/svg/blue4.svg"
+  },
+  {
+    name: "Contact",
+    url: "/contact",
+    icon: "/svg/blue5.svg"
+  },
+];
+
+export const MobileIconDark = "/svg/hamburger-dark.svg"
+export const MobileIconLight = "/svg/hamburger-light.svg"
+
+
 export const logOptions = [
   {
       name: "Google",
@@ -62,3 +94,5 @@ export const logOptions = [
 export const gradient1 = "/svg/Ellipse1.svg"
 
 export const gradient2 = "/svg/Ellipse2.svg"
+
+export const sidebarImage= "/images/sidebarImage.png"

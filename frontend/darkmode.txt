@@ -34,9 +34,8 @@ w głownym layautcie zmieniając defaultTheme na którąś z opcji pomiędzy dar
 Wlasne komponenty zeby zachowac porzadek przydaloby sie tworzyc w /components, 
 a /components/ui uzywac do instalowania gotowych komponentow z np ShadcnUI czy MagicUI
 
-MobileNavigation -> zaimplementuje w navbarze w najblizyszym czasie 
-(zaimplementowana bedzie poza /sign-in oraz /sign-up bo przed zalogowaniem
-linki i tak beda niedostepne)
+MobileNavigation -> (zaimplementowane poza /sign-in oraz /sign-up 
+bo przed zalogowaniem linki i tak beda niedostepne)
 
 // TO DO
 
