@@ -9,5 +9,6 @@ namespace backend.Services
     public interface ILoginService
     {
         Task<User?> AuthenticateUserAsync(string email, string password);
+        string GenerateJwtToken(User user);
     }
 }
