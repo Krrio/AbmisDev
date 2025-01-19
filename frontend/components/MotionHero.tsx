@@ -8,12 +8,13 @@ import gsap from 'gsap';
 const MotionHero = () => {
   const heroImageRef = useRef<HTMLDivElement>(null);
 
+  // Fragment GSAP do animacji elementów UI 
   useEffect(() => {
     if (heroImageRef.current) {
       gsap.fromTo(
         heroImageRef.current,
-        { y: -200, opacity: 0 }, // Start position above the viewport
-        { y: 0, opacity: 1, duration: 1, ease: "power2.out" } // End at its natural position
+        { y: -200, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 1, ease: "power2.out" } 
       );
     }
   }, []);
