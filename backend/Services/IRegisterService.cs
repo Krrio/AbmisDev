@@ -7,9 +7,8 @@ using backend.Data.Models;
 
 namespace backend.Services
 {
-    public interface ILoginService
+    public interface IRegisterService
     {
-        Task<User?> AuthenticateUserAsync(LoginRequestDto loginRequest);
-        string GenerateJwtToken(User user);
+        Task<bool> RegisterUserAsync(RegisterRequestDto request);
     }
 }
