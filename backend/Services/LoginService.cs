@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using backend.Data;
+using backend.Data.Dtos;
 using backend.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -22,14 +23,10 @@ namespace backend.Services
             _context = context;
             _jwtSettings = jwtSettings;
         }
-        public async Task<User?> AuthenticateUserAsync(string email, string password)
+        public async Task<User?> AuthenticateUserAsync(LoginRequestDto loginRequest)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
-            if (user == null)
-            {
-                return null;
-            }
-            if (user.Password != password)
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
+            if (user == null || user.Password != loginRequest.Password)
             {
                 return null;
             }
