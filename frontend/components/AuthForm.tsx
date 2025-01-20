@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { z } from "zod";
@@ -15,6 +16,9 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { apiRequest } from "@/utils/api";
 import { useRouter } from 'next/navigation'
+import { useToast } from "@/hooks/use-toast"
+import { ToastAction } from "./ui/toast";
+
 
 
 // Typ formularza
@@ -22,15 +26,24 @@ type FormType = "sign-in" | "sign-up";
 
 // Schemat walidacji Zod
 const authFormSchema = (formType: FormType) => {
-  return z.object({
-    email: z.string().email("Invalid email address"),
-    password: z.string().min(6, "Password must be at least 6 characters long"),
-    fullName:
-      formType === "sign-up"
-        ? z.string().min(2, "Name must be at least 2 characters").max(50)
-        : z.string().optional(),
-  });
+  return z
+    .object({
+      email: z.string().email("Invalid email address"),
+      password: z.string().min(6, "Password must be at least 6 characters long"),
+      confirmPassword:
+        formType === "sign-up"
+          ? z.string().min(6, "Password must be at least 6 characters long")
+          : z.string().optional(),
+    })
+    .refine(
+      (data) => formType !== "sign-up" || data.password === data.confirmPassword,
+      {
+        message: "Passwords must match",
+        path: ["confirmPassword"], // Wskazuje pole, w którym wyświetlić komunikat
+      }
+    );
 };
+
 
 const AuthForm = ({ formType = "sign-up" }: { formType: FormType }) => {
   const schema = authFormSchema(formType);
@@ -39,11 +52,13 @@ const AuthForm = ({ formType = "sign-up" }: { formType: FormType }) => {
     defaultValues: {
       email: "",
       password: "",
-      fullName: formType === "sign-up" ? "" : undefined,
+      confirmPassword: formType === "sign-up" ? "" : undefined,
     },
   });
 
   const router = useRouter();
+
+  const { toast } = useToast()
   
   const onSubmit = async (data: any) => {
 
@@ -61,15 +76,28 @@ const AuthForm = ({ formType = "sign-up" }: { formType: FormType }) => {
   
       if (formType === "sign-in") {
         localStorage.setItem("token", result.token);
-        alert("Login successful!");
+        toast({
+          variant: "confirm",
+          title: "Uh yea! Something went ...right!",
+          description: "You have been logged correctly.",
+        })
         router.push("/"); // Przykładowe przekierowanie
       } else {
-        alert("Registration successful!");
+        toast({
+          variant: "confirm",
+          title: "Uh yea! Something went ...right!",
+          description: "You have been registred correctly.",
+        })
         router.push("/sign-in"); // Przykładowe przekierowanie
       }
     } catch (error: any) {
       console.error("Error:", error.message);
-      alert(error.message || "An error occurred");
+      toast({
+        variant: "error",
+        title: "Uh oh! Something went wrong.",
+        description: "Your password or email is incorrect.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      })
     }
   };
   
@@ -118,14 +146,14 @@ const AuthForm = ({ formType = "sign-up" }: { formType: FormType }) => {
       )}
         {formType === "sign-up" && (
           <FormField
-            name="fullName"
+            name="confirmPassword"
             control={form.control}
             render={({ field }) => (
               <FormItem>
                 <FormControl>
                 <Input
                     type="password"
-                    placeholder="Enter your password"
+                    placeholder="Confirm your password"
                     className="shad-form-input font-medium"
                     {...field}
                   />
