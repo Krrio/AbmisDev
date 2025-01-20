@@ -7,14 +7,15 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { apiRequest } from "@/utils/api";
+import { useRouter } from 'next/navigation'
+
 
 // Typ formularza
 type FormType = "sign-in" | "sign-up";
@@ -42,9 +43,36 @@ const AuthForm = ({ formType = "sign-up" }: { formType: FormType }) => {
     },
   });
 
-  const onSubmit = (data: any) => {
-    console.log("Form data:", data);
+  const router = useRouter();
+  
+  const onSubmit = async (data: any) => {
+
+
+    try {
+      const endpoint =
+        formType === "sign-up" ? "/auth/register" : "/auth/login";
+  
+      const payload =
+        formType === "sign-up"
+          ? { ...data, confirmPassword: data.password }
+          : data;
+  
+      const result = await apiRequest(endpoint, "POST", payload);
+  
+      if (formType === "sign-in") {
+        localStorage.setItem("token", result.token);
+        alert("Login successful!");
+        router.push("/"); // Przykładowe przekierowanie
+      } else {
+        alert("Registration successful!");
+        router.push("/sign-in"); // Przykładowe przekierowanie
+      }
+    } catch (error: any) {
+      console.error("Error:", error.message);
+      alert(error.message || "An error occurred");
+    }
   };
+  
 
   return (
     <Form {...form}>
@@ -95,7 +123,12 @@ const AuthForm = ({ formType = "sign-up" }: { formType: FormType }) => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input className="shad-form-input font-medium" type="text" placeholder="Enter your full name" {...field} />
+                <Input
+                    type="password"
+                    placeholder="Enter your password"
+                    className="shad-form-input font-medium"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
