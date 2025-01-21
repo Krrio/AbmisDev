@@ -13,7 +13,8 @@ namespace backend.Data.Models
         public string? Description { get; set; }
         public DateTime DueDate { get; set; }
         public ItemStatus ItemStatus { get; set; } = ItemStatus.Pending; 
-
+        public int UserId { get; set; }
+        public User User { get; set; } 
         public ToDoItem() { }
     }
 }
