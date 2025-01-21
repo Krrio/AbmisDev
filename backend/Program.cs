@@ -70,6 +70,7 @@ builder.Services.AddDbContext<AppDbContext>(
 );
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IRegisterService, RegisterService>();
+builder.Services.AddScoped<ITasksService, TasksService>();
 builder.Services.AddControllers();
 var app = builder.Build();
 

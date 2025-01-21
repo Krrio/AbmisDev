@@ -14,5 +14,6 @@ namespace backend.Data.Models
         public required string Email { get; set; }
         [Required, MaxLength(100)]
         public required string Password { get; set; }
+        public ICollection<ToDoItem> ToDoItems { get; set; } = new List<ToDoItem>(); //Relacja z lista zadań, potrzebna do zarządzaniem zadaniami kontretnego użytkownika
     }
 }
