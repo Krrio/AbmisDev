@@ -1,12 +1,10 @@
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import { authItems, gradient1, gradient2, heroImage, logOptions } from "../constants";
+import { gradient1, gradient2, heroImage, logOptions } from "../constants";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ModeToggle } from "@/components/ui/ModeToggle";
 import { AuroraText } from "@/components/ui/aurora-text";
-import { useRef } from "react";
 import MotionHero from "@/components/MotionHero";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
@@ -15,7 +13,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     <main className="container mx-auto px-[80px]">
       <div className="hidden lg:block">
         <Navbar />
-      </div>
+      </div> 
       <div className="flex flex-col lg:flex-row w-full h-screen">
         <div className="lg:w-2/3 h-full flex flex-col justify-center items-center lg:items-start space-y-[40px]">
           <div className="flex flex-col lg:flex-row items-center lg:items-start lg:space-x-4 lg:-mt-[165px] mt-10">

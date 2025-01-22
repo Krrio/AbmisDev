@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { z } from "zod";
@@ -7,29 +8,42 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { apiRequest } from "@/utils/api";
+import { useRouter } from 'next/navigation'
+import { useToast } from "@/hooks/use-toast"
+import { ToastAction } from "./ui/toast";
+
+
 
 // Typ formularza
 type FormType = "sign-in" | "sign-up";
 
 // Schemat walidacji Zod
 const authFormSchema = (formType: FormType) => {
-  return z.object({
-    email: z.string().email("Invalid email address"),
-    password: z.string().min(6, "Password must be at least 6 characters long"),
-    fullName:
-      formType === "sign-up"
-        ? z.string().min(2, "Name must be at least 2 characters").max(50)
-        : z.string().optional(),
-  });
+  return z
+    .object({
+      email: z.string().email("Invalid email address"),
+      password: z.string().min(6, "Password must be at least 6 characters long"),
+      confirmPassword:
+        formType === "sign-up"
+          ? z.string().min(6, "Password must be at least 6 characters long")
+          : z.string().optional(),
+    })
+    .refine(
+      (data) => formType !== "sign-up" || data.password === data.confirmPassword,
+      {
+        message: "Passwords must match",
+        path: ["confirmPassword"], // Wskazuje pole, w którym wyświetlić komunikat
+      }
+    );
 };
+
 
 const AuthForm = ({ formType = "sign-up" }: { formType: FormType }) => {
   const schema = authFormSchema(formType);
@@ -38,13 +52,55 @@ const AuthForm = ({ formType = "sign-up" }: { formType: FormType }) => {
     defaultValues: {
       email: "",
       password: "",
-      fullName: formType === "sign-up" ? "" : undefined,
+      confirmPassword: formType === "sign-up" ? "" : undefined,
     },
   });
 
-  const onSubmit = (data: any) => {
-    console.log("Form data:", data);
+  const router = useRouter();
+
+  const { toast } = useToast()
+  
+  const onSubmit = async (data: any) => {
+
+
+    try {
+      const endpoint =
+        formType === "sign-up" ? "/auth/register" : "/auth/login";
+  
+      const payload =
+        formType === "sign-up"
+          ? { ...data, confirmPassword: data.password }
+          : data;
+  
+      const result = await apiRequest(endpoint, "POST", payload);
+  
+      if (formType === "sign-in") {
+        localStorage.setItem("token", result.token);
+        toast({
+          variant: "confirm",
+          title: "Uh yea! Something went ...right!",
+          description: "You have been logged correctly.",
+        })
+        router.push("/"); // Przykładowe przekierowanie
+      } else {
+        toast({
+          variant: "confirm",
+          title: "Uh yea! Something went ...right!",
+          description: "You have been registred correctly.",
+        })
+        router.push("/sign-in"); // Przykładowe przekierowanie
+      }
+    } catch (error: any) {
+      console.error("Error:", error.message);
+      toast({
+        variant: "error",
+        title: "Uh oh! Something went wrong.",
+        description: "Your password or email is incorrect.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      })
+    }
   };
+  
 
   return (
     <Form {...form}>
@@ -90,12 +146,17 @@ const AuthForm = ({ formType = "sign-up" }: { formType: FormType }) => {
       )}
         {formType === "sign-up" && (
           <FormField
-            name="fullName"
+            name="confirmPassword"
             control={form.control}
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input className="shad-form-input font-medium" type="text" placeholder="Enter your full name" {...field} />
+                <Input
+                    type="password"
+                    placeholder="Confirm your password"
+                    className="shad-form-input font-medium"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

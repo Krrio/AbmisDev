@@ -178,7 +178,7 @@ body {
     @apply bg-[#4461F2] hover:bg-blue-500 rounded-[10px] font-bold shadow-[0_2px_8px_rgba(68,_97,_242,_0.7)] dark:shadow-[0_2px_4px_rgba(68,_97,_242,_0.7)] py-6 dark:text-white !important
   }
   .shad-form-input {
-    @apply bg-[#EAF0F7] dark:bg-[#EAF0F7] dark:placeholder:text-gray-500 focus:ring-[#EAF0F7] py-6 focus:border-none !important
+    @apply bg-[#EAF0F7] dark:bg-[#EAF0F7] dark:placeholder:text-gray-500 focus:ring-[#EAF0F7] py-6 focus:border-none dark:text-black !important
   }
 
   .auth-option {
