@@ -4,17 +4,15 @@ import { MobileIconLight, MobileNavItems, sidebarImage } from "@/app/constants"
 import {
     Sheet,
     SheetContent,
-    SheetDescription,
-    SheetHeader,
     SheetTitle,
     SheetTrigger,
   } from "@/components/ui/sheet"
 import Image from "next/image"
 import { Separator } from "./ui/separator"
-import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
 import UserFooter from "./UserFooter"
+import Link from "next/link"
   
 const MobileNav = () => {
 
