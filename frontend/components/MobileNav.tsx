@@ -67,7 +67,7 @@ const MobileNav = () => {
                             height={224} 
                             />
                         </div>
-                        <Separator className="mt-8"/>
+                        <Separator className="mt-4"/>
                         <div className="flex items-center justify-center mt-4">
                             <UserFooter />
                         </div>

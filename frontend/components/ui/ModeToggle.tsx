@@ -1,40 +1,44 @@
-"use client"
+"use client";
 
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
+import { Switch } from "./switch";
 
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
+// Prosty przełącznik tylko między Light a Dark
 export function ModeToggle() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
+
+  // next-themes wymaga sprawdzenia, czy jesteśmy po "hydration"
+  // aby uniknąć błędów SSR/CSR (theme może być "undefined" na początku).
+  const [mounted, setMounted] = React.useState(false)
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Dopóki komponent nie jest zamontowany, nie wyświetlaj Switcha
+  if (!mounted) {
+    return null
+  }
+
+  // Sprawdzamy, czy obecny theme to "dark"
+  const isDark = theme === "dark"
+
+  // Funkcja zmieniająca motyw
+  const toggleTheme = (checked: boolean) => {
+    setTheme(checked ? "dark" : "light")
+  }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="flex items-center gap-2">
+      {/* Ikona zależna od bieżącego motywu */}
+      {isDark ? (
+        <Moon className="h-5 w-5 text-white" />
+      ) : (
+        <Sun className="h-5 w-5 text-black" />
+      )}
+      {/* Switch z shadcn - przełącza motyw */}
+      <Switch checked={isDark} onCheckedChange={toggleTheme} />
+    </div>
   )
 }

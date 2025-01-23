@@ -172,6 +172,14 @@ body {
     @apply flex gap-4 w-full justify-start items-center px-6 h-[52px] rounded-full !important
   }
 
+  .logout-button-basic {
+    @apply bg-transparent text-black dark:text-white border-none shadow-none cursor-pointer transition-transform duration-200 group-hover:translate-x-2
+  }
+
+  .logout-button-anim {
+    @apply absolute left-10 top-1/2 -translate-y-1/2 -translate-x-8  opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100
+  }
+
   /* Overridy do styli ShadcnUI */
 
   .shad-form-button {
