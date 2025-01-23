@@ -200,4 +200,25 @@ body {
   .nav-icon-active {
     @apply text-[#4461F2]
   }
+  .fc-daygrid-day {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .fc-daygrid-event {
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+  }
+
+  .calendar-toDay-button {
+    @apply bg-gray-300 text-black mx-1 import
+  }
+
+  .fc .fc-button.fc-dayGridMonth-button {
+    background-color: #4CAF50 !important;
+    color: white !important;
+  }
+  
+  
 }

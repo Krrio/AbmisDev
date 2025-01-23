@@ -4,6 +4,7 @@ import { authItems, navItems } from '@/app/constants'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
+import { ModeToggle } from './ui/ModeToggle'
 
 const Navbar = () => {
 
@@ -11,6 +12,7 @@ const Navbar = () => {
 
   return (
     <header className='mt-16'>
+       <ModeToggle/>
         <div className='flex items-center justify-between'>
             <nav>
                 <ul className='flex space-x-8 font-medium header-1'>
