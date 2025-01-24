@@ -101,6 +101,8 @@ body {
     --color-3: 210 100% 63%;
     --color-4: 195 100% 63%;
     --color-5: 90 100% 63%;
+    
+    
   }
   .dark {
     --background: 235 39.4% 12.9%;
@@ -215,10 +217,77 @@ body {
     @apply bg-gray-300 text-black mx-1 import
   }
 
-  .fc .fc-button.fc-dayGridMonth-button {
-    background-color: #4CAF50 !important;
-    color: white !important;
-  }
+  
   
   
 }
+
+ /* Stylizacja kalendarza */
+.react-calendar {
+  background-color: #f9fafb; /* Jasnoszary */
+  border: 1px solid #e5e7eb; /* Szary border */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.react-calendar__tile {
+  color: #1f2937; /* Kolor tekstu */
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.react-calendar__tile--active {
+  background-color: #4CAF50; /* Zielony */
+  color: white;
+}
+
+.react-calendar__tile:hover {
+  background-color: #34D399; /* Jasny zielony na hover */
+}
+
+.react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #6b7280; /* Szary tekst */
+}
+
+.fc-button {
+  background-color: #fafafa !important; /* Standardowy kolor */
+  color: gray !important; /* Standardowy tekst */
+  font-weight: bold !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 5px !important;
+  
+}
+
+.fc-button-active {
+  background-color: #e70707 !important; /* Kolor aktywnego przycisku */
+  color: white !important; /* Tekst aktywnego przycisku */
+  border-radius: 5px !important;
+}
+
+.fc-media-screen {
+  background-color: #ffffff !important;
+}
+
+.fc-today-button {
+  font-weight: lighter !important;
+  color: rgb(37, 37, 37) !important;
+}
+
+.fc-col-header-cell, .fc-daygrid-day {
+  height: 100px; /* Wyrównanie wysokości */
+  min-height: 100px; /* Minimalna wysokość */
+  box-sizing: border-box; /* Uwzględnienie paddingu w rozmiarze */
+}
+
+.fc-timegrid-slot {
+  height: 50px; /* Wysokość każdej godziny */
+}
+
+.fc-view {
+  height: 100%; /* Rozciągnięcie widoku na całą dostępną przestrzeń */
+}
+
