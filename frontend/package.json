@@ -25,7 +25,7 @@
     "gsap": "^3.12.7",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.473.0",
-    "motion": "^11.18.1",
+    "motion": "^11.18.2",
     "next": "15.0.4",
     "next-themes": "^0.4.4",
     "qss": "^3.0.0",

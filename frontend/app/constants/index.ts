@@ -101,3 +101,11 @@ export const logoutIcon = "/svg/logout.svg"
 
 export const dot = "/svg/dot-selected.svg"
 
+export const MobileLogo = "/svg/mobileLogo.svg"
+
+export const Logo = "/images/LogoIcon.png"
+
+export const Logo1 = "/images/LogoIcon1.png"
+
+
+

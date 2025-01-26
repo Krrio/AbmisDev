@@ -1,8 +1,11 @@
+import { Logo } from "@/app/constants";
 import {
     InstagramLogoIcon,
     LinkedInLogoIcon,
     TwitterLogoIcon,
   } from "@radix-ui/react-icons";
+import Image from "next/image";
+import { JSX } from "react";
   
   interface Icon {
     icon: JSX.Element;
@@ -15,22 +18,13 @@ import {
     { icon: <TwitterLogoIcon />, url: "#" },
   ];
   
-  type Link = {
-    text: string;
-    url: string;
-  };
-  
-  const links: Link[] = [
-    { text: "About", url: "#" },
-    { text: "Services", url: "#" },
-    { text: "Contact", url: "#" },
-  ];
   
   export function Footer() {
     return (
       <footer className="flex flex-col gap-y-5 rounded-lg py-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-x-2">
+            <Image src={Logo} alt="logo" width={34} height={34} className="dark:invert"/>
             <h2 className="text-lg font-bold text-neutral-900 dark:text-white">
             AbmisDev
             </h2>

@@ -29,7 +29,7 @@ const MobileNav = () => {
                 <Image src={MobileIconLight} alt="open" width={34} height={34} className="dark:invert"/>
             </SheetTrigger>
                 <SheetContent>
-                    <SheetTitle className="flex justify-between text-xl font-bold">
+                    <SheetTitle className="flex justify-between text-xl font-bold uppercase">
                         AbmisDev
                         <ModeToggle />
                     </SheetTitle>
