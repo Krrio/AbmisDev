@@ -24,7 +24,7 @@ const Calendar = () => {
     { title: 'All-Hands Meeting', start: '2025-01-22T08:30:00', color: '#4CAF50' },
     { title: 'Monthly Catch-Up', start: '2025-01-22T09:30:00', color: '#FFC107' },
     { title: 'Lunch with Client', start: '2025-01-22T13:00:00', color: '#2196F3' },
-    { title: 'Design Review', start: '2025-01-22T16:00:00', color: '#F44336' },
+    { title: 'Design Review', start: '2025-01-24T16:00:00', color: '#F44336' },
   ]}
 />
 

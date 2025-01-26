@@ -291,3 +291,38 @@ body {
   height: 100%; /* Rozciągnięcie widoku na całą dostępną przestrzeń */
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr; /* Sidebar 1/5 szerokości, kalendarz 4/5 */
+  height: 100vh; /* Pełna wysokość widoku */
+}
+
+.sidebar {
+  background-color: #1a202c; /* Kolor tła sidebara */
+  overflow-y: auto; /* Przewijanie dla dużej listy wydarzeń */
+}
+
+.calendar {
+  padding: 1rem; /* Margines wokół kalendarza */
+  background-color: #f7fafc; /* Kolor tła kalendarza */
+}
+
+.fc-event {
+  white-space: normal !important; /* Pozwala na zawijanie tekstu */
+  word-wrap: break-word; /* Złamie długie słowa */
+  text-overflow: ellipsis; /* Dodaje "..." w przypadku nadmiaru tekstu */
+  overflow: hidden; /* Ukrywa nadmiar tekstu */
+  padding: 4px; /* Daje trochę przestrzeni wewnątrz wydarzenia */
+  font-size: 12px; /* Możesz dostosować rozmiar tekstu */
+}
+
+.fc-timegrid-slot-label-cushion {
+font-weight: bold;
+}
+
+.fc-timeGrid-axis {
+  text-transform: capitalize !important; /* Pierwsza litera duża */
+  font-size: 14px !important;/* Zmiana rozmiaru tekstu */
+  margin-right: 5px !important; /* Dodanie odstępu */
+  color: #333; /* Zmiana koloru */
+}
