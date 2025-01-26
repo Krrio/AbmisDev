@@ -26,7 +26,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
                 alt="gradient"
                 width={500}
                 height={500}
-                className="absolute -mt-[400px] -z-10 dark:-ml-[200px] dark:sm:hidden dark:lg:block"
+                className="absolute -mt-[400px] -z-10 -ml-[200px] dark:sm:hidden dark:lg:block"
                 draggable={false}
               />
             </div>
@@ -36,7 +36,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
                 alt="hero"
                 width={400}
                 height={400}
-                className="lg:-mt-6 lg:ml-4 md:absolute md:hidden xl:block scale-75 lg:scale-100 hidden"
+                className="lg:-mt-6 lg:ml-4 2xl:ml-[120px] md:absolute md:hidden xl:block scale-75 lg:scale-100 hidden"
                 draggable={false}
               />
               <div className="md:hidden">

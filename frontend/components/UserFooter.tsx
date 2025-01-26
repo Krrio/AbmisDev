@@ -1,12 +1,11 @@
 import React from 'react'
+import Logout from './Logout'
 
 const UserFooter = () => {
   return (
-
-    // TO DO prosta karta w stylu "Welcome back" i pod spodem ${imie}
-    // mozliwe dopiero po zaimplementowaniu rejestracji uzytkownikow
-
-    <div>UserFooter</div>
+    <div>
+      <Logout />
+    </div>
   )
 }
 

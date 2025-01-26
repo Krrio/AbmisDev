@@ -26,3 +26,15 @@ export const apiRequest = async (
 
   return response.json();
 };
+
+
+export const logout = () => {
+  localStorage.removeItem("token");
+};
+
+// test alertu świadczącego o problemie z wylogowywnaiem 
+
+// export const logout = async (): Promise<void> => {
+//   // Symulacja błędu
+//   throw new Error("Failed to log out due to a server issue.");
+// };

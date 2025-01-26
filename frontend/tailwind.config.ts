@@ -138,7 +138,7 @@ export default {
   					bottom: '50%',
   					right: '25%'
   				}
-  			}
+  			},
   		}
   	}
   },

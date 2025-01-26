@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
 import UserFooter from "./UserFooter"
 import Link from "next/link"
+import { ModeToggle } from "./ui/ModeToggle"
   
 const MobileNav = () => {
 
@@ -28,8 +29,9 @@ const MobileNav = () => {
                 <Image src={MobileIconLight} alt="open" width={34} height={34} className="dark:invert"/>
             </SheetTrigger>
                 <SheetContent>
-                    <SheetTitle className="flex text-xl font-bold">
+                    <SheetTitle className="flex justify-between text-xl font-bold uppercase">
                         AbmisDev
+                        <ModeToggle />
                     </SheetTitle>
                     <Separator className="mt-4"/>
                     <nav className="flex px-4 mt-5">
@@ -67,7 +69,7 @@ const MobileNav = () => {
                             height={224} 
                             />
                         </div>
-                        <Separator className="mt-8"/>
+                        <Separator className="mt-4"/>
                         <div className="flex items-center justify-center mt-4">
                             <UserFooter />
                         </div>

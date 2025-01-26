@@ -96,3 +96,16 @@ export const gradient1 = "/svg/Ellipse1.svg"
 export const gradient2 = "/svg/Ellipse2.svg"
 
 export const sidebarImage= "/images/sidebarImage.png"
+
+export const logoutIcon = "/svg/logout.svg"
+
+export const dot = "/svg/dot-selected.svg"
+
+export const MobileLogo = "/svg/mobileLogo.svg"
+
+export const Logo = "/images/LogoIcon.png"
+
+export const Logo1 = "/images/LogoIcon1.png"
+
+
+

@@ -44,32 +44,6 @@ body {
 
 @layer base {
 
-  /* Remove scrollbar */
-  .remove-scrollbar::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
-    border-radius: 0px;
-  }
-
-  .remove-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .remove-scrollbar::-webkit-scrollbar-thumb {
-    background: transparent;
-    border-radius: 0px;
-  }
-
-  .remove-scrollbar::-webkit-scrollbar-thumb:hover {
-    /* background: #1e2238; */
-    background: transparent;
-  }
-
-  .recharts-responsive-container {
-    height: initial !important;
-  }
-
-
   :root {
     --background: 0 0% 96.5%;
     --foreground: 0 0% 3.9%;
@@ -140,13 +114,22 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground no-scrollbar;
   }
 }
 
 /* Customowe klasy do stylowania  */
 
 @layer utilities {
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: 0;  /* Firefox */
+  }
 
   .header-1 {
     @apply tracking-[1px] text-[15px]
@@ -170,6 +153,14 @@ body {
 
   .mobile-nav-item {
     @apply flex gap-4 w-full justify-start items-center px-6 h-[52px] rounded-full !important
+  }
+
+  .logout-button-basic {
+    @apply bg-transparent text-black dark:text-white border-none shadow-none cursor-pointer transition-transform duration-200 group-hover:translate-x-2
+  }
+
+  .logout-button-anim {
+    @apply absolute left-10 top-1/2 -translate-y-1/2 -translate-x-8  opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100
   }
 
   /* Overridy do styli ShadcnUI */
