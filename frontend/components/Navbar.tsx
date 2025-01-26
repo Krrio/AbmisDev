@@ -1,11 +1,12 @@
 "use client"
 
-import { authItems, navItems } from '@/app/constants'
+import { authItems, dot, navItems } from '@/app/constants'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import Logout from './Logout'
 import { ModeToggle } from './ui/ModeToggle'
+import Image from 'next/image'
 
 const Navbar = () => {
 
@@ -29,15 +30,29 @@ const Navbar = () => {
     <header className='mt-16'>
         <div className='flex items-center justify-between cursor-pointer'>
             <nav>
+            {isLoggedIn && (
                 <ul className='flex space-x-8 font-medium header-1'>
-                    {navItems.map((item, index) => (
-                        <li key={index}>
-                            <Link href={item.url}>
-                            {item.name}
-                            </Link>
-                        </li>
-                    ))}
+                {navItems.map((item, index) => {
+                    const isActive = pathname === item.url;                  
+                    return (
+                        <li key={index} className="relative">
+                        <Link href={item.url} className="px-2 py-1 flex flex-col items-center hover:underline">
+                          {item.name}
+                          {isActive && (
+                            <Image
+                              src={dot}
+                              alt="dot"
+                              width={16}
+                              height={16}
+                              className='dark:invert'
+                            />
+                          )}
+                        </Link>
+                      </li>
+                    );
+                })}
                 </ul>
+            )}
             </nav>
             <nav>
                 <ul className='flex space-x-8 header-1 font-medium text-[#4461F2]'>

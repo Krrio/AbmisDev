@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
 import Navbar from "@/components/Navbar";
 
@@ -12,6 +13,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
           <MobileNav />
         </div>
         {children}
+        <Footer />
       </main>
     );
   };
