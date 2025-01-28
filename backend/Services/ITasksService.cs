@@ -9,7 +9,7 @@ namespace backend.Services
 {
     public interface ITasksService
     {
-        Task<IEnumerable<ToDoItem>> GetAllTasksAsync(int userId);
+        Task<IEnumerable<ToDoTaskRequestDto>> GetAllTasksAsync(string? timeRange, DateTime? startDate, DateTime? endDate, int userId, string? sortBy = null, string? sortOrder = "asc");
         Task<ToDoItem> GetTaskByIdAsync(int id, int userId);
         Task<ToDoItem> CreateTaskAsync(ToDoTaskRequestDto request, int userId);
         Task<ToDoItem> DeleteTaskAsync(int id, int userId);
