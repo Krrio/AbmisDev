@@ -1,6 +1,7 @@
 using backend.Data;
 using backend.Data.Dtos;
 using backend.Data.Models;
+using backend.Data.Models.Enums;
 using backend.Enums;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,42 +16,122 @@ namespace backend.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<ToDoItem>> GetAllTasksAsync(int userId)
+        public async Task<IEnumerable<ToDoTaskRequestDto>> GetAllTasksAsync(string? timeRange, DateTime? startDate, DateTime? endDate, int userId, string? sortBy = null, string? sortOrder = "asc")
         {
-            return await _context.Tasks
-            .Where(t => t.UserId == userId) // Filtrujemy taski po userId
-            .ToListAsync();
+            var query = _context.Tasks.Where(t => t.UserId == userId).AsQueryable();
+
+            var now = DateTime.UtcNow;
+
+            //Filtrowanie
+            switch (timeRange?.ToLower())
+            {
+                //Zwracamy zadania z dzisiaj
+                case "today":
+                    query = query.Where(t => t.DueDate.Date == now.Date);
+                    break;
+                //Zwracamy zadania z jutra
+                case "week":
+                    var startOfWeek = now.Date.AddDays(-(int)now.DayOfWeek);
+                    var endOfWeek = startOfWeek.AddDays(7);
+                    query = query.Where(t => t.DueDate.Date >= startOfWeek && t.DueDate.Date < endOfWeek);
+                    break;
+                // Zwracamy zadania z przeszłości
+                case "overdue":
+                    query = query.Where(t => t.DueDate.Date < now.Date && t.ItemStatus != ItemStatus.Completed);
+                    break;
+                // Zwracamy zadania z określonego zakresu dat
+                case "custom":
+                    if (startDate.HasValue && endDate.HasValue)
+                    {
+                        query = query.Where(t => t.DueDate.Date >= startDate.Value.Date && t.DueDate.Date <= endDate.Value.Date);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Nie podano zakresu dat.");
+                    }
+                    break;
+                default:
+                    break;
+            }
+            //Sortowanie
+            if(!string.IsNullOrEmpty(sortBy))
+            {
+                switch(sortBy.ToLower())
+                {
+                    // Sortowanie po dacie
+                    case "duedate":
+                        query = sortOrder.ToLower() == "desc" 
+                        ? query.OrderByDescending(t => t.DueDate)
+                        : query.OrderBy(t => t.DueDate);
+                    break;
+                    // Sortowanie po priorytecie
+                    case "priority":
+                        query = sortOrder.ToLower() == "desc"
+                        ? query.OrderByDescending(t => t.ItemPriority)
+                        : query.OrderBy(t => t.ItemPriority);
+                    break;
+                    // Sortowanie po statusie
+                    case "status":
+                        query = sortOrder.ToLower() == "desc"
+                        ? query.OrderByDescending(t => t.ItemStatus)
+                        : query.OrderBy(t => t.ItemStatus);
+                    break;
+
+                    default:
+                        throw new ArgumentException($"Nieobsługiwany parametr sortowania: {sortBy}");
+                }
+            }
+            // Wykonanie zapytania
+            var tasks = await query.ToListAsync();
+            // Mapowanie na DTO
+            return tasks.Select(t => new ToDoTaskRequestDto
+            {
+                Title = t.Title,
+                Description = t.Description,
+                DueDate = t.DueDate,
+                Priority = t.ItemPriority,
+                ItemStatus = t.ItemStatus
+            });
         }
-        // Metoda zwracająca listę zadań z podziałem na strony - Jeszcze nie wiem jak to zastosować w kalendarzu żeby to miało sens
-        /*  public async Task<IEnumerable<ToDoItem>> GetAllTaskByAsync(int pageNumber, int pageSize)
-        {
-            return await _context.Tasks
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-        } */
         public async Task<ToDoItem> CreateTaskAsync(ToDoTaskRequestDto request, int userId)
         {
-            if (request.DueDate.HasValue && request.DueDate < DateTime.Now)
-                throw new ArgumentException("Data nie może być wcześniejsza niż obecna.");
-
-            var newTask = new ToDoItem
+            try
             {
-                Title = request.Title,
-                Description = request.Description,
-                DueDate = request.DueDate ?? DateTime.Now,
-                ItemStatus = request.ItemStatus ?? ItemStatus.Pending,
-                UserId = userId
-            };
+                if (request.DueDate.HasValue && request.DueDate < DateTime.Now)
+                    throw new ArgumentException("Data nie może być wcześniejsza niż obecna.");
 
-            _context.Tasks.Add(newTask);
-            await _context.SaveChangesAsync();
+                if(request.Priority.HasValue && !Enum.IsDefined(typeof(ItemPriority), request.Priority.Value))
+                {
+                    throw new ArgumentException("Nieprawidłowa wartość priorytetu.");
+                }
+                var newTask = new ToDoItem
+                {
+                    ItemPriority = request.Priority ?? ItemPriority.Medium,
+                    Title = request.Title,
+                    Description = request.Description,
+                    DueDate = request.DueDate ?? DateTime.Now,
+                    ItemStatus = request.ItemStatus ?? ItemStatus.Pending,
+                    UserId = userId
+                };
 
-            // Sprawdzenie poprawności zapisu
-            if (newTask.Id == 0)
-                throw new InvalidOperationException("Nie udało się wygenerować ID dla nowego zadania.");
+                _context.Tasks.Add(newTask);
+                await _context.SaveChangesAsync();
 
-            return newTask;
+                
+                // Sprawdzenie poprawności zapisu
+                if (newTask.Id == 0)
+                    throw new InvalidOperationException("Nie udało się wygenerować ID dla nowego zadania.");
+
+                return newTask;
+            }
+            catch (Exception ex)
+            {
+                // Logowanie szczegółów błędu
+                Console.WriteLine($"Błąd podczas zapisu: {ex.Message}");
+                if (ex.InnerException != null)
+                    Console.WriteLine($"InnerException: {ex.InnerException.Message}");
+                throw;
+            }
         }
 
         public async Task<ToDoItem> DeleteTaskAsync(int id, int userId)
@@ -99,6 +180,6 @@ namespace backend.Services
             return await _context.Tasks
                 .Where(t => t.DueDate >= startDate && t.DueDate < endDate && t.UserId == userId)
                 .ToListAsync();
-                }
+        }
     }
 }

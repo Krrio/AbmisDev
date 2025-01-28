@@ -19,14 +19,21 @@ namespace backend.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<IActionResult> GetAllTasksAsync()
+        public async Task<ActionResult<IEnumerable<ToDoTaskRequestDto>>> GetAllTasksAsync(
+            [FromQuery] string? timeRange = null,
+            [FromQuery] DateTime? startDate = null,
+            [FromQuery] DateTime? endDate = null,
+            [FromQuery] string? sortBy = null,
+            [FromQuery] string? orderBy = "asc"
+            
+        )
         {
             try
             {
                 var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0"); // Pobieramy userId z tokena JWT
                 Console.WriteLine($"UserId Claim: {userId}");
                 System.Console.WriteLine($"Nameidentifier: {userId}");
-                var tasks = await _tasksService.GetAllTasksAsync(userId);
+                var tasks = await _tasksService.GetAllTasksAsync(timeRange, startDate, endDate, userId, sortBy, orderBy);
                 return Ok(tasks);
             }
             catch (Exception ex)

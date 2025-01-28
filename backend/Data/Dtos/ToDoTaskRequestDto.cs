@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using backend.Data.Models.Enums;
 using backend.Enums;
 
 namespace backend.Data.Dtos
@@ -14,5 +15,6 @@ namespace backend.Data.Dtos
         public DateTime? DueDate { get; set; }
 
         public ItemStatus? ItemStatus { get; set; }
+        public ItemPriority? Priority { get; set; }
     }
 }
