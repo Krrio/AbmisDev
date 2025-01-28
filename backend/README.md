@@ -63,10 +63,12 @@ Przykładowe zadania w bazie danych:
   }
 ]
 ```
-
 1. Filtry timeRange
+   
    GET /api/tasks/all?timeRange=today
+   
    GET /api/tasks/all?timeRange=week
+   
    GET /api/tasks/all?timeRange=overdue
 
 **Customowy zakres**
@@ -76,20 +78,21 @@ Format daty do customowego zakresu
 
 Przykład: 2025-01-24T15:18:53.227Z
 
-_Oznacza to, że w polach startDate, endDate w swagerze wpisujemy datę w dokładnie takim formacie, URL Wygląda tak:_
+Oznacza to, że w polach startDate, endDate w swagerze wpisujemy datę w dokładnie takim formacie, URL Wygląda tak:
+
 http://localhost:5185/api/Tasks/all?timeRange=custom&startDate=2025-01-24T15%3A18%3A53.227Z&endDate=2025-01-30T15%3A18%3A53.227Z&orderBy=asc
 
 TODO: Przerobić ewentualny format, jeśli będą problemy na froncie
 
 2. Sortowanie SortBy:
 
-duedate
-priority
+duedate,
+priority,
 status
 
 Do tego pole OrderBy:
 
-asc
+asc,
 desc
 
 Domyślnie jest zawsze asc
