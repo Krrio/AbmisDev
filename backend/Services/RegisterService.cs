@@ -23,6 +23,13 @@ namespace backend.Services
             {
                 throw new Exception("Ten adres email jest już zajęty!");
             }
+
+            var emailChecker = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
+            if(!emailChecker.IsValid(request.Email))
+            {
+                throw new Exception("Niepoprawny format adresu email!");
+            }
+
             var newUser = new User{
                 Email = request.Email,
                 Password = request.Password
