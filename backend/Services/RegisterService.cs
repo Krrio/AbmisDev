@@ -24,6 +24,10 @@ namespace backend.Services
                 throw new Exception("Ten adres email jest już zajęty!");
             }
 
+            if(string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+            {
+                throw new Exception("Nie podano wymaganych danych!");
+            }
             var emailChecker = new System.ComponentModel.DataAnnotations.EmailAddressAttribute();
             if(!emailChecker.IsValid(request.Email))
             {
