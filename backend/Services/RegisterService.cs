@@ -23,6 +23,10 @@ namespace backend.Services
             {
                 throw new Exception("Ten adres email jest już zajęty!");
             }
+            if(request.Password != request.ConfirmPassword)
+            {
+                throw new Exception("Hasła nie są takie same!");
+            }
 
             if(string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
             {
