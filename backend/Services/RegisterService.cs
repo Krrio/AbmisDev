@@ -28,7 +28,19 @@ namespace backend.Services
                 throw new Exception("Hasła nie są takie same!");
             }
 
-            if(string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+            if(request.Email == null)
+            {
+                throw new Exception("Nie podano wymaganych danych!");
+            }
+            if(string.IsNullOrWhiteSpace(request.Email))
+            {
+                throw new Exception("Niepoprawny format adresu email!");
+            }
+            if(string.IsNullOrWhiteSpace(request.Password))
+            {
+                throw new Exception("Nie podano wymaganych danych!");
+            }
+            if(string.IsNullOrWhiteSpace(request.Password))
             {
                 throw new Exception("Nie podano wymaganych danych!");
             }
