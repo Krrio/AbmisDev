@@ -97,7 +97,7 @@ namespace backend.Services
         {
             try
             {
-                if (request.DueDate.HasValue && request.DueDate < DateTime.Now)
+                if (request.DueDate.HasValue && request.DueDate < DateTime.UtcNow.AddMilliseconds(-500))
                     throw new ArgumentException("Data nie może być wcześniejsza niż obecna.");
 
                 if(request.Priority.HasValue && !Enum.IsDefined(typeof(ItemPriority), request.Priority.Value))
@@ -109,7 +109,7 @@ namespace backend.Services
                     ItemPriority = request.Priority ?? ItemPriority.Medium,
                     Title = request.Title,
                     Description = request.Description,
-                    DueDate = request.DueDate ?? DateTime.Now,
+                    DueDate = request.DueDate ?? DateTime.UtcNow,
                     ItemStatus = request.ItemStatus ?? ItemStatus.Pending,
                     UserId = userId
                 };
@@ -165,6 +165,7 @@ namespace backend.Services
             task.Description = request.Description ?? task.Description;
             task.DueDate = request.DueDate ?? task.DueDate;
             task.ItemStatus = request.ItemStatus ?? task.ItemStatus;
+            task.ItemPriority = request.Priority ?? task.ItemPriority;
 
             _context.Tasks.Update(task);
             await _context.SaveChangesAsync();
