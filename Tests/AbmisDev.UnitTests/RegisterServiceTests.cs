@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using backend.Data;
 using backend.Data.Dtos;
@@ -94,6 +95,72 @@ namespace AbmisDev.UnitTests
                 .Should().ThrowAsync<Exception>()
                 .WithMessage("Niepoprawny format adresu email!");
                 
+            }
+        }
+        [Fact]
+        public async Task RegisterUserAsync_WithEmptyOrNullEmail_ThrowsException()
+        {
+            // Arrange
+            var options = GetDbOptions();
+            using(var context = new AppDbContext(options))
+            {
+                var service = new RegisterService(context);
+                var request = new RegisterRequestDto
+                {
+                    Email = "",
+                    Password = "secret123",
+                    ConfirmPassword = "secret123"
+                };
+
+                // Act & Assert
+                await FluentActions
+                    .Invoking(() => service.RegisterUserAsync(request))
+                    .Should().ThrowAsync<Exception>()
+                    .WithMessage("Niepoprawny format adresu email!");
+            }
+        }
+        [Fact]
+        public async Task RegisterUserAsync_WithNullEmail_ThrowsException()
+        {
+            // Arrange
+            var options = GetDbOptions();
+            using(var context = new AppDbContext(options))
+            {
+                var service = new RegisterService(context);
+                var request = new RegisterRequestDto
+                {
+                    Email = null,
+                    Password = "secret123",
+                    ConfirmPassword = "secret123"
+                };
+            
+                //Act & Assert
+                await FluentActions
+                    .Invoking(() => service.RegisterUserAsync(request))
+                    .Should().ThrowAsync<Exception>()
+                    .WithMessage("Nie podano wymaganych danych!");
+            }
+        }
+        [Fact]
+        public async Task RegisterUserAsync_WithDifferentPasswords_ThrowsException()
+        {
+            // Arrange
+            var options = GetDbOptions();
+            using(var context = new AppDbContext(options))
+            {
+                var service = new RegisterService(context);
+                var request = new RegisterRequestDto
+                {
+                    Email = "test@gmail.com",
+                    Password = "secret123",
+                    ConfirmPassword = "secret1234"
+                };
+
+                // Act & Assert
+                await FluentActions
+                    .Invoking(() => service.RegisterUserAsync(request))
+                    .Should().ThrowAsync<Exception>()
+                    .WithMessage("Hasła nie są takie same!");
             }
         }
     }
