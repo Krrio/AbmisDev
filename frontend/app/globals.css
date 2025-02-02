@@ -168,6 +168,15 @@ body {
   .shad-form-button {
     @apply bg-[#4461F2] hover:bg-blue-500 rounded-[10px] font-bold shadow-[0_2px_8px_rgba(68,_97,_242,_0.7)] dark:shadow-[0_2px_4px_rgba(68,_97,_242,_0.7)] py-6 dark:text-white !important
   }
+
+  .shad-popover-button {
+    @apply bg-[#4461F2] hover:bg-blue-500 rounded-[10px] font-bold shadow-[0_2px_8px_rgba(68,_97,_242,_0.7)] dark:shadow-[0_2px_4px_rgba(68,_97,_242,_0.7)] py-5 dark:text-white !important
+  }
+
+  .shad-cancel-button {
+    @apply rounded-[10px] font-medium py-5 dark:text-white !important
+  }
+
   .shad-form-input {
     @apply bg-[#EAF0F7] dark:bg-[#EAF0F7] dark:placeholder:text-gray-500 focus:ring-[#EAF0F7] py-6 focus:border-none dark:text-black !important
   }
@@ -190,5 +199,28 @@ body {
 
   .nav-icon-active {
     @apply text-[#4461F2]
+  }
+
+  /* Overridy do time pickera */
+  
+  .custom-time-picker {
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .custom-time-picker .react-time-picker__wrapper {
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .custom-time-picker .react-time-picker__inputGroup {
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .custom-time-picker .react-time-picker__inputGroup__input {
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
   }
 }

@@ -107,5 +107,28 @@ export const Logo = "/images/LogoIcon.png"
 
 export const Logo1 = "/images/LogoIcon1.png"
 
+interface Status {
+  name: string;
+  value: string;
+}
+
+export const Statuses: Status[] = [
+  { name: "To Do", value: "To Do" },
+  { name: "In Progress", value: "In Progress" },
+  { name: "Done", value: "Done" },
+];
 
 
+interface Priority {
+  name: string;
+  value: string;
+  icon: string;
+}
+
+export const Priorities: Priority[] = [
+  { name: "Very High", value: "Very High", icon: "/svg/highestIcon.svg" },
+  { name: "High", value: "High", icon: "/svg/highIcon.svg" },
+  { name: "Medium", value: "Work", icon: "/svg/mediumIcon.svg" },
+  { name: "Low", value: "Low", icon: "/svg/lowIcon.svg" },
+  { name: "Lowest", value: "Lowest", icon: "/svg/lowestIcon.svg" },
+];
